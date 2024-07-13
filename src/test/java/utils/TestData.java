@@ -17,6 +17,7 @@ public class TestData {
                 .lastName(faker.name().lastName())
                 .address(faker.address().streetAddress())
                 .city(faker.address().city())
+                .state(faker.address().state())
                 .zipCode(faker.address().zipCode())
                 .phoneNumber(faker.phoneNumber().phoneNumber())
                 .ssn(faker.idNumber().ssnValid())
