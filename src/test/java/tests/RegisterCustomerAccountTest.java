@@ -16,18 +16,20 @@ public class RegisterCustomerAccountTest extends TestBase {
     public void userCanCreateAccountWithAllFields() {
         registerAccountPage.openRegisterAccountPage();
 
+        BankAccount generatedBankAccount = testData.generateFakeBankAccount();
+
         BankAccount bankAccount = BankAccount.builder()
-                .firstName(testData.generateFakeBankAccount().getFirstName())
-                .lastName(testData.generateFakeBankAccount().getLastName())
-                .address(testData.generateFakeBankAccount().getAddress())
-                .city(testData.generateFakeBankAccount().getCity())
-                .state(testData.generateFakeBankAccount().getState())
-                .zipCode(testData.generateFakeBankAccount().getZipCode())
-                .phoneNumber(testData.generateFakeBankAccount().getPhoneNumber())
-                .ssn(testData.generateFakeBankAccount().getSsn())
-                .username(testData.generateFakeBankAccount().getUsername())
-                .password(testData.generateFakeBankAccount().getPassword())
-                .passwordConfirmation(testData.generateFakeBankAccount().getPasswordConfirmation())
+                .firstName(generatedBankAccount.getFirstName())
+                .lastName(generatedBankAccount.getLastName())
+                .address(generatedBankAccount.getAddress())
+                .city(generatedBankAccount.getCity())
+                .state(generatedBankAccount.getState())
+                .zipCode(generatedBankAccount.getZipCode())
+                .phoneNumber(generatedBankAccount.getPhoneNumber())
+                .ssn(generatedBankAccount.getSsn())
+                .username(generatedBankAccount.getUsername())
+                .password(generatedBankAccount.getPassword())
+                .passwordConfirmation(generatedBankAccount.getPasswordConfirmation())
                 .build();
 
         registerAccountPage.register(bankAccount);
@@ -37,9 +39,6 @@ public class RegisterCustomerAccountTest extends TestBase {
         registerAccountPage.getWelcomeTitle().shouldHave(exactText(expectedWelcomeText));
         registerAccountPage.getSuccessMessage().shouldHave(exactText("Your account was created successfully. You are now logged in."));
     }
-
-
-
 
 
     @Test
@@ -65,6 +64,7 @@ public class RegisterCustomerAccountTest extends TestBase {
         registerAccountPage.getPasswordConfirmationError().shouldHave(exactText("Password confirmation is required."));
     }
 
+
     @Test
     public void userCanNotCreateAccountWithAddressOnly() {
         registerAccountPage.openRegisterAccountPage();
@@ -87,6 +87,7 @@ public class RegisterCustomerAccountTest extends TestBase {
         registerAccountPage.getPasswordConfirmationError().shouldHave(exactText("Password confirmation is required."));
     }
 
+
     @Test
     public void userCanNotCreateAccountWithCityOnly() {
         registerAccountPage.openRegisterAccountPage();
@@ -108,6 +109,7 @@ public class RegisterCustomerAccountTest extends TestBase {
         registerAccountPage.getPasswordError().shouldHave(exactText("Password is required."));
         registerAccountPage.getPasswordConfirmationError().shouldHave(exactText("Password confirmation is required."));
     }
+
 
     @Test
     public void userCanNotCreateAccountWithStateOnly() {
@@ -280,8 +282,8 @@ public class RegisterCustomerAccountTest extends TestBase {
                 .phoneNumber(testData.generateFakeBankAccount().getPhoneNumber())
                 .ssn(testData.generateFakeBankAccount().getSsn())
                 .username(testData.generateFakeBankAccount().getUsername())
-                .password("123456")
-                .passwordConfirmation("123457")
+                .password(testData.generateFakeBankAccount().getPassword())
+                .passwordConfirmation(testData.generateFakeBankAccount().getPasswordConfirmation())
                 .build();
 
         registerAccountPage.register(bankAccount);
