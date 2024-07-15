@@ -20,7 +20,7 @@ public class RegisterCustomerAccountCsvSourceTest extends TestBase {
     @ParameterizedTest
     @Tag("SMOKE")
     @DisplayName("Пользователь может создать аккаунт с корректными данными")
-    public void userCanCreateAccountWithAllFields(String firstName, String lastName, String address, String city, String state, String zipCode, String phoneNumber, String ssn, String username, String password, String passwordConfirmation) {
+    public void userCanCreateAccountWithAllFieldsTest(String firstName, String lastName, String address, String city, String state, String zipCode, String phoneNumber, String ssn, String username, String password, String passwordConfirmation) {
 
         registerAccountPage.openRegisterAccountPage();
 
@@ -53,7 +53,7 @@ public class RegisterCustomerAccountCsvSourceTest extends TestBase {
     })
     @Tag("SMOKE")
     @DisplayName("Пользователь не может создать аккаунт с несовпадающими паролями")
-    public void userCannotCreateAccountWithMismatchedPasswords(String password, String passwordConfirmation) {
+    public void userCannotCreateAccountWithMismatchedPasswordsTest(String password, String passwordConfirmation) {
         registerAccountPage.openRegisterAccountPage();
 
         BankAccount generatedBankAccount = testData.generateFakeBankAccount();
