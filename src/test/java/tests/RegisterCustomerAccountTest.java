@@ -1,6 +1,7 @@
 package tests;
 
 import datas.BankAccount;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.RegisterAccountPage;
 import utils.TestData;
@@ -9,35 +10,24 @@ import static com.codeborne.selenide.Condition.*;
 
 public class RegisterCustomerAccountTest extends TestBase {
 
-    RegisterAccountPage registerAccountPage = new RegisterAccountPage();
-    TestData testData = new TestData();
+    private final RegisterAccountPage registerAccountPage = new RegisterAccountPage();
+    private BankAccount validAccount;
+
+    @BeforeEach
+    public void setUp() {
+        registerAccountPage.openRegisterAccountPage();
+        validAccount = TestData.generateFakeBankAccount();
+    }
 
     @Test
     public void userCanCreateAccountWithAllFields() {
-        registerAccountPage.openRegisterAccountPage();
-
-        BankAccount generatedBankAccount = testData.generateFakeBankAccount();
-
-        BankAccount bankAccount = BankAccount.builder()
-                .firstName(generatedBankAccount.getFirstName())
-                .lastName(generatedBankAccount.getLastName())
-                .address(generatedBankAccount.getAddress())
-                .city(generatedBankAccount.getCity())
-                .state(generatedBankAccount.getState())
-                .zipCode(generatedBankAccount.getZipCode())
-                .phoneNumber(generatedBankAccount.getPhoneNumber())
-                .ssn(generatedBankAccount.getSsn())
-                .username(generatedBankAccount.getUsername())
-                .password(generatedBankAccount.getPassword())
-                .passwordConfirmation(generatedBankAccount.getPasswordConfirmation())
-                .build();
-
-        registerAccountPage.register(bankAccount);
+        registerAccountPage.register(validAccount);
 
         // Проверка ожидаемого результата
-        String expectedWelcomeText = "Welcome " + bankAccount.getUsername();
-        registerAccountPage.getWelcomeTitle().shouldHave(exactText(expectedWelcomeText));
-        registerAccountPage.getSuccessMessage().shouldHave(exactText("Your account was created successfully. You are now logged in."));
+        registerAccountPage.getWelcomeTitle()
+                .shouldHave(exactText(registerAccountPage.getWelcomeText(validAccount.getUsername())));
+        registerAccountPage.getSuccessMessage()
+                .shouldHave(exactText("Your account was created successfully. You are now logged in."));
     }
 
 

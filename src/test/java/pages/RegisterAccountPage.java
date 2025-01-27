@@ -41,41 +41,30 @@ public class RegisterAccountPage {
         open("/parabank/register.htm");
     }
 
+    private void fillInputField(SelenideElement element, String value) {
+        if (value != 0) {
+            element.sendKeys(value);
+        }
+    }
+
     public void register(BankAccount bankAccount) {
-        if (bankAccount.getFirstName() != null) {
-            firstNameInput.sendKeys(bankAccount.getFirstName());
-        }
-        if (bankAccount.getLastName() != null) {
-            lastNameInput.sendKeys(bankAccount.getLastName());
-        }
-        if (bankAccount.getAddress() != null) {
-            addressInput.sendKeys(bankAccount.getAddress());
-        }
-        if (bankAccount.getCity() != null) {
-            cityInput.sendKeys(bankAccount.getCity());
-        }
-        if (bankAccount.getState() != null) {
-            stateInput.sendKeys(bankAccount.getState());
-        }
-        if (bankAccount.getZipCode() != null) {
-            zipCodeInput.sendKeys(bankAccount.getZipCode());
-        }
-        if (bankAccount.getPhoneNumber() != null) {
-            phoneNumberInput.sendKeys(bankAccount.getPhoneNumber());
-        }
-        if (bankAccount.getSsn() != null) {
-            ssnInput.sendKeys(bankAccount.getSsn());
-        }
-        if (bankAccount.getUsername() != null) {
-            usernameInput.sendKeys(bankAccount.getUsername());
-        }
-        if (bankAccount.getPassword() != null) {
-            passwordInput.sendKeys(bankAccount.getPassword());
-        }
-        if (bankAccount.getPasswordConfirmation() != null) {
-            passwordConfirmationInput.sendKeys(bankAccount.getPasswordConfirmation());
-        }
+        fillInputField(firstNameInput, bankAccount.getFirstName());
+        fillInputField(lastNameInput, bankAccount.getLastName());
+        fillInputField(addressInput, bankAccount.getAddress());
+        fillInputField(cityInput, bankAccount.getCity());
+        fillInputField(stateInput, bankAccount.getState());
+        fillInputField(zipCodeInput, bankAccount.getZipCode());
+        fillInputField(phoneNumberInput, bankAccount.getPhoneNumber());
+        fillInputField(ssnInput, bankAccount.getSsn());
+        fillInputField(usernameInput, bankAccount.getUsername());
+        fillInputField(passwordInput, bankAccount.getPassword());
+        fillInputField(passwordConfirmationInput, bankAccount.getPasswordConfirmation());
+
 
         registerButton.click();
+    }
+
+    public String getWelcomeText(String username) {
+        return "Welcome " + username;
     }
 }

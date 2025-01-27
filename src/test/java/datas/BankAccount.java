@@ -2,19 +2,21 @@ package datas;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.With;
 
 @Getter
 @Builder
+@With
 public class BankAccount {
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private String zipCode;
-    private String phoneNumber;
-    private String ssn;
-    private String username;
-    private String password;
-    private String passwordConfirmation;
+    private final String firstName;
+    private final String lastName;
+    private final String address;
+    private final String city;
+    private final String state;
+    private final String zipCode;
+    private final String phoneNumber;
+    private final String ssn;
+    private final String username;
+    private final String password;
+    private final String passwordConfirmation;
 }
