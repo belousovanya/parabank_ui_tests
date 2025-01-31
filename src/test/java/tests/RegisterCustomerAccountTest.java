@@ -8,7 +8,7 @@ import utils.TestData;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class RegisterCustomerAccountTest extends TestBase {
+public class RegisterCustomerAccountTest extends BaseTest {
 
     private final RegisterAccountPage registerAccountPage = new RegisterAccountPage();
     private BankAccount validAccount;
